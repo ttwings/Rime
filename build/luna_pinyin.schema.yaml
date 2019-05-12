@@ -2,10 +2,10 @@ __build_info:
   rime_version: 1.4.0
   timestamps:
     default: 1548686840
-    default.custom: 1557668363
+    default.custom: 1557670128
     key_bindings: 1548686840
     key_bindings.custom: 0
-    luna_pinyin.custom: 0
+    luna_pinyin.custom: 1477805482
     luna_pinyin.schema: 1548686838
     punctuation: 1548686840
     punctuation.custom: 0
@@ -42,6 +42,13 @@ engine:
     - "table_translator@custom_phrase"
     - reverse_lookup_translator
     - script_translator
+    - "table_translator@english"
+english:
+  dictionary: easy_en
+  enable_completion: true
+  enable_sentence: false
+  initial_quality: "-1"
+  spelling_hints: 9
 key_binder:
   bindings:
     - {accept: "Control+p", send: Up, when: composing}
@@ -371,6 +378,7 @@ schema:
     - "佛振 <chen.sst@gmail.com>"
   dependencies:
     - stroke
+    - easy_en
   description: |
     Rime 預設的拼音輸入方案。
     參考以下作品而創作：
@@ -384,19 +392,10 @@ schema:
   version: 0.24
 speller:
   algebra:
+    - "xform/^([b-df-np-z])$/$1_/"
     - "erase/^xx$/"
     - "abbrev/^([a-z]).+$/$1/"
     - "abbrev/^([zcs]h).+$/$1/"
-    - "derive/^([nl])ve$/$1ue/"
-    - "derive/^([jqxy])u/$1v/"
-    - "derive/un$/uen/"
-    - "derive/ui$/uei/"
-    - "derive/iu$/iou/"
-    - "derive/([aeiou])ng$/$1gn/"
-    - "derive/([dtngkhrzcs])o(u|ng)$/$1o/"
-    - "derive/ong$/on/"
-    - "derive/ao$/oa/"
-    - "derive/([iu])a(o|ng?)$/a$1$2/"
   alphabet: zyxwvutsrqponmlkjihgfedcba
   delimiter: " '"
 switches:
@@ -410,7 +409,7 @@ switches:
   - name: ascii_punct
     states: ["。，", "．，"]
 translator:
-  dictionary: luna_pinyin
+  dictionary: luna_pinyin.extended
   preedit_format:
     - "xform/([nl])v/$1ü/"
     - "xform/([nl])ue/$1üe/"
